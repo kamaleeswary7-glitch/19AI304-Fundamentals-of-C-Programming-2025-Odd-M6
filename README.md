@@ -33,7 +33,21 @@ To develop a C program using the static storage class in a function with a param
 ### Step 8:
   Stop
 # Program:
-# Output:
+#include <stdio.h>
+void add (int a,int b)
+{   int x;
+    x=a+b;
+    printf("The Result of Addition is:%d",x);
+    
+}
+int main()
+{
+   int a,b;
+   scanf("%d %d",&a,&b);
+   add(a,b);
+}
+# Output:![WhatsApp Image 2025-12-26 at 7 49 39 PM](https://github.com/user-attachments/assets/e3a283a0-3061-4931-b2b6-4230eb64b8ce)
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -78,8 +92,52 @@ Thus, the program was implemented and executed successfully, and the required ou
   Display the result.
 ### Step 11:
   Stop
-# Program:
-# Output:
+# Program:#include <stdio.h>
+
+// Function prototypes
+int add(int a, int b) { return a + b; }
+int subtract(int a, int b) { return a - b; }
+int multiply(int a, int b) { return a * b; }
+int divide(int a, int b) { 
+    if (b != 0)
+        return a / b;
+    else {
+        printf("Error: Division by zero!\n");
+        return 0;
+    }
+}
+
+int main() {
+    int num1, num2, choice, result;
+    int (*operation)(int, int); // Function pointer
+
+    printf("Enter two integers: ");
+    scanf("%d %d", &num1, &num2);
+
+    printf("\nSelect an operation:\n");
+    printf("1. Addition\n2. Subtraction\n3. Multiplication\n4. Division\n");
+    printf("Enter your choice: ");
+    scanf("%d", &choice);
+
+    // Assign function pointer based on user choice
+    switch(choice) {
+        case 1: operation = add; break;
+        case 2: operation = subtract; break;
+        case 3: operation = multiply; break;
+        case 4: operation = divide; break;
+        default:
+            printf("Invalid choice!\n");
+            return 0;
+    }
+
+    // Call the function via pointer
+    result = operation(num1, num2);
+    printf("Result: %d\n", result);
+
+    return 0;
+}
+# Output:![WhatsApp Image 2025-12-26 at 7 53 09 PM](https://github.com/user-attachments/assets/0d99c01a-54b0-49e2-9525-26fb28b49cec)
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -122,8 +180,57 @@ Thus, the program was implemented and executed successfully, and the required ou
   - **Step 9.2:** If employee salary equals `high`, print employee number, name, and salary.
 ### Step 10:
   Stop
-# Program:
-# Output:
+# Program:#include <stdio.h>
+#include <string.h>
+
+// Define structure for Employee
+struct Employee {
+    int empNo;
+    char name[50];
+    float salary;
+};
+
+int main() {
+    int n, i;
+    float maxSalary;
+    
+    printf("Enter the number of employees: ");
+    scanf("%d", &n);
+
+    struct Employee emp[n];
+
+    // Input employee details
+    for (i = 0; i < n; i++) {
+        printf("\nEnter details for employee %d:\n", i + 1);
+        printf("Employee Number: ");
+        scanf("%d", &emp[i].empNo);
+        printf("Employee Name: ");
+        scanf(" %[^\n]%*c", emp[i].name); // Read full name with spaces
+        printf("Employee Salary: ");
+        scanf("%f", &emp[i].salary);
+    }
+
+    // Find the maximum salary
+    maxSalary = emp[0].salary;
+    for (i = 1; i < n; i++) {
+        if (emp[i].salary > maxSalary)
+            maxSalary = emp[i].salary;
+    }
+
+    // Display employee(s) with maximum salary
+    printf("\nEmployee(s) with highest salary %.2f:\n", maxSalary);
+    for (i = 0; i < n; i++) {
+        if (emp[i].salary == maxSalary) {
+            printf("Employee Number: %d\n", emp[i].empNo);
+            printf("Employee Name: %s\n", emp[i].name);
+            printf("Salary: %.2f\n\n", emp[i].salary);
+        }
+    }
+
+    return 0;
+}
+# Output:![WhatsApp Image 2025-12-26 at 7 56 09 PM](https://github.com/user-attachments/assets/46132efb-4e6a-47a9-8fb9-d842970fff29)
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -165,8 +272,28 @@ Thus, the program was implemented and executed successfully, and the required ou
   Display the calculated age (years, months, and days) in the `main` function.
 ### Step 9:
   Stop
-# Program:
-# Output:
+# Program:#include <stdio.h>
+int calc(int aday, int amonth, int ayear,int bday,int bmonth,int byear)
+{
+    int age=ayear-byear;
+    if(amonth<bmonth ||( amonth==bmonth && aday<bday))
+    {
+        age--;
+    }
+    return age;
+}
+int main()
+{
+    int aday,amonth,ayear,bday,bmonth,byear;
+    scanf("%d%d%d",&aday,&amonth,&ayear);
+    scanf("%d%d%d",&bday,&bmonth,&byear);
+    int age=calc(aday,amonth,ayear,bday,bmonth,byear);
+    printf("Present Age is : %d",age);
+    return 0;
+}
+
+# Output:![WhatsApp Image 2025-12-26 at 7 57 05 PM](https://github.com/user-attachments/assets/dbf35f64-1417-4d9d-8b35-e9d5c573db97)
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -201,8 +328,32 @@ Thus, the program was implemented and executed successfully, and the required ou
   Access and print the same value using the pointer `ptr` in character format.
 ### Step 10:
   Stop
-# Program:
-# Output:
+# Program:#include <stdio.h>
+
+// Define a union
+union Data {
+    int i;
+    char c;
+};
+
+int main() {
+    union Data d;
+    union Data *ptr;
+
+    // Assign integer value to the union
+    d.i = 65;   // ASCII value of 'A'
+
+    // Pointer to union
+    ptr = &d;
+
+    // Access and display using union pointer
+    printf("Value as integer: %d\n", ptr->i);
+    printf("Value as character: %c\n", ptr->c);
+
+    return 0;
+}
+# Output:![WhatsApp Image 2025-12-26 at 7 58 19 PM](https://github.com/user-attachments/assets/27920b56-8bea-4832-b890-e3d9a2ad4587)
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
